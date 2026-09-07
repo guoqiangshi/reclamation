@@ -9,7 +9,7 @@ LOS_DSC = double(LOS_DSC);
 ASPECT = double(ASPECT);
 
 % Processing of nodata values
-ASPECT(ASPECT == ASPECT1) = NaN; % ASPECT1 is the nodata value
+ASPECT(ASPECT == -inf) = NaN;
 LOS_ASC(LOS_ASC == -inf) = NaN;
 LOS_DSC(LOS_DSC == -inf) = NaN;
 %%
@@ -35,10 +35,10 @@ alph_D=pi*(-169.18)/180;  %% DSC azumuth angle
 
 %% 
 % (Sentinel)
-tha_A=pi*39.14/180;  %% ASC incidence angle
-tha_D=pi*34.92/180;  %% DSC incidence angle
-alph_A=pi*(-10.04)/180;  %% ASC azumuth angle
-alph_D=pi*(-169.48)/180;  %% DSC azumuth angle
+% tha_A=pi*39.14/180;  %% ASC incidence angle
+% tha_D=pi*34.92/180;  %% DSC incidence angle
+% alph_A=pi*(-10.04)/180;  %% ASC azumuth angle
+% alph_D=pi*(-169.48)/180;  %% DSC azumuth angle
 %%
 % Initialize output matrices
 dE_matrix = nan(size(LOS_ASC));
