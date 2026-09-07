@@ -1,7 +1,8 @@
 # This script performs Inverse Distance Weighting (IDW) interpolation
 
 """
-Note - 
+Note - The script reads input data from an Excel file (`idw.xlsx`) containing latitude/longitude grid points, 
+sea level data, IPCC data, and IPCC velocity data. The results are exported to text files for further analysis.
 """
 
 import numpy as np
@@ -55,8 +56,8 @@ interp_grid_points = list(zip(lat_lon.iloc[:, 0], lat_lon.iloc[:, 1]))
 # Read data from Excel file
 df = pd.read_excel('idw.xlsx', sheet_name='sea_level')
 # Extract sea level data for stations
-SF = df.iloc[:, 0]
-AL = df.iloc[:, 1]
+SF = df.iloc[:, 1]
+AL = df.iloc[:, 2]
 stations['SF']['data'] = SF
 stations['AL']['data'] = AL
 
@@ -78,8 +79,8 @@ print(f"The average sea level data for the interpolated grid points has been sav
 # 2. Generate a time series of IPCC data
 df = pd.read_excel('idw.xlsx', sheet_name='IPCC')
 
-SF= df.iloc[:, :14].values.reshape(-1,)
-AL= df.iloc[:, 15:].values.reshape(-1,)
+SF= df.iloc[:, 3:16].values.reshape(-1,)
+AL= df.iloc[:, 21:].values.reshape(-1,)
 stations['SF']['data'] = SF
 stations['AL']['data'] = AL
 
@@ -99,8 +100,8 @@ print(f"The IPCC data for the interpolated grid points has been saved to {output
 # 3. Generate the change rate of IPCC data
 df = pd.read_excel('idw.xlsx', sheet_name='IPCC_vel')
 
-SF= df.iloc[:, :14].values.reshape(-1,)
-AL= df.iloc[:, 15:].values.reshape(-1,)
+SF= df.iloc[:, 3:16].values.reshape(-1,)
+AL= df.iloc[:, 21:].values.reshape(-1,)
 stations['SF']['data'] = SF
 stations['AL']['data'] = AL
 
